@@ -83,6 +83,7 @@ class AlienInvasion:
             # Сброс игровых настроек.
             self.settings.initialize_dynamic_settings()
             self.start_game()
+            self.sb.prep_score()
             # Указатель мыши скрывается.
             pygame.mouse.set_visible(False)
 
@@ -132,7 +133,8 @@ class AlienInvasion:
         )
 
         if collisions:
-            self.stats.score += self.settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
 
         if not self.aliens:
