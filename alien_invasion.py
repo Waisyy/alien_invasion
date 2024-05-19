@@ -77,7 +77,9 @@ class AlienInvasion:
             # Сброс игровой статистики.
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_high_score()
             self.sb.prep_level()
+            self.sb.prep_ships()
             self.game_active = True
 
             # Удаление оставшихся пуль и пришельцев.
@@ -152,8 +154,9 @@ class AlienInvasion:
     def _ship_hit(self):
         """Обрабатывает столкновение корабля с пришельцем."""
         if self.stats.ships_left > 0:
-            # Уменьшение ships_left и обновление счёта.
+            # Уменьшение ships_left и обновление панели счёта.
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             # Очистка списков пришельцев и снарядов.
             self.aliens.empty()
